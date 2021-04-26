@@ -2,7 +2,7 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { Button, MenuItem } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import {useState, useEffect} from "react"
-const someData = [
+const testVoteData = [
   {
     name: 'Page A',
     uv: 4000,
@@ -47,23 +47,33 @@ const someData = [
   },
 ];
 
-const updateGraph = (e)=>{
+const updateVoteGraph = (e)=>{
     e.preventDefault();
     fetch('/TestData.json').then((res)=>{
         console.log(res.json())
     })
 }
+
+const getBillIDs = (e) =>{
+  e.preventDefault();
+  fetch('/BillIDs.json').then((res)=>{
+      console.log(res.json())
+  })
+}
 function BillChart(){
-      const [data, setData] = useState();
-     useEffect((someAttrs)=>{
-         setData(someData)
+      const [voteData, setVoteData] = useState();
+
+      const [billIDList, setbillIDList] = useState({'value':[]});
+     useEffect(()=>{
+      setVoteData(testVoteData)
      })
      return <>
-         <form onSubmit={updateGraph} >
+         <form onSubmit={updateVoteGraph} >
             <input id="BillID"></input>
             <button type='submit' >Search</button>
          </form>
-        <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+         
+        <LineChart width={600} height={300} data={voteData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
             <Line type="monotone" dataKey="uv" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
             <XAxis dataKey="name" />
