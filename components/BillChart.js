@@ -1,5 +1,8 @@
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
-const data = [
+import { Button, MenuItem } from "@blueprintjs/core";
+import { Select } from "@blueprintjs/select";
+import {useState, useEffect} from "react"
+const someData = [
   {
     name: 'Page A',
     uv: 4000,
@@ -44,13 +47,31 @@ const data = [
   },
 ];
 
-function TestChart(){
-    return <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-    <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-    <XAxis dataKey="name" />
-    <YAxis />
-  </LineChart>
+const updateGraph = (e)=>{
+    e.preventDefault();
+    fetch('/TestData.json').then((res)=>{
+        console.log(res.json())
+    })
+}
+function BillChart(){
+      const [data, setData] = useState();
+     useEffect((someAttrs)=>{
+         setData(someData)
+     })
+     return <>
+         <form onSubmit={updateGraph} >
+            <input id="BillID"></input>
+            <button type='submit' >Search</button>
+         </form>
+        <LineChart width={600} height={300} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+            <XAxis dataKey="name" />
+            <YAxis />
+          </LineChart>
+    </>
+
+    
 }
 
-export default TestChart
+export default BillChart

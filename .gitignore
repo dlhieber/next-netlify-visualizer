@@ -14,7 +14,9 @@
 
 # production
 /build
-
+/.ipynb_checkpoints
+/public/.ipynb_checkpoints
+/public/data/.ipynb_checkpoints
 # misc
 .DS_Store
 
