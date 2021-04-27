@@ -47,26 +47,26 @@ const testVoteData = [
   },
 ];
 
-const updateVoteGraph = (e)=>{
-    e.preventDefault();
-    fetch('/TestData.json').then((res)=>{
-        console.log(res.json())
-    })
-}
 
-const getBillIDs = (e) =>{
-  e.preventDefault();
-  fetch('/BillIDs.json').then((res)=>{
-      console.log(res.json())
-  })
-}
 function BillChart(){
       const [voteData, setVoteData] = useState();
 
       const [billIDList, setbillIDList] = useState({'value':[]});
+      const updateVoteGraph = (e)=>{
+        e.preventDefault();
+        fetch('/TestData.json').then(res=>res.json())
+        .then(data => {setVoteData(data)})
+    }
+    
+    const getBillIDs = (e) =>{
+      e.preventDefault();
+      fetch('/BillIDs.json').then((res)=>{
+          console.log(res.json())
+      })
+    }
      useEffect(()=>{
       setVoteData(testVoteData)
-     })
+     }, [])
      return <>
          <form onSubmit={updateVoteGraph} >
             <input id="BillID"></input>
