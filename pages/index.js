@@ -15,9 +15,7 @@ export default function Home() {
         <Header title="This Will Be a Bill Page Maybe?" />
         
            <BillChart/>
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        
       </main>
 
       <Footer />
