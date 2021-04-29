@@ -1,4 +1,4 @@
-import { BarChart, Tooltip, Bar, Legend, CartesianGrid, XAxis, YAxis, Treemap } from 'recharts';
+import { BarChart, Tooltip, Bar, Legend, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { Button, MenuItem, H1 as H2 } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import { ItemRenderer } from "@blueprintjs/select";
@@ -18,19 +18,10 @@ function BillChart() {
     progress: undefined,
   })
   const [voteData, setVoteData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
-  const [sentimentedConcepts, setSentimentedConcepts] = useState([]);
-  const [sentimentedEntities, setSentimentedEntities] = useState([]);
-  const [topicConcepts, settopicConcepts] = useState([]);
-  const [topicEntities, settopicEntities] = useState([]);
-
   const [billIDText, setbillIDText] = useState('');
   const [summary, setSummary] = useState('')
   const [billTitle, setbillTitle] = useState('');
   const [billIDList, setbillIDList] = useState({ 'value': [] });
-  const COLORS = ['#8889DD', '#9597E4', '#8DC77B'];
-
-
   const getBill = (e) => {
     e.preventDefault();
     console.log('Getting /data/' + e.target[0].value + '.json')
@@ -51,25 +42,27 @@ function BillChart() {
 
         })
         data.votes.forEach(vote => {
-          if (vote.IsVoteNay == "true") {
-            voteTallies.forEach(tally => {
-              if (tally.partyName === vote.CaucusShortName) {
+          if (vote.IsVoteNay=="true") {
+            voteTallies.forEach(tally =>{
+              if (tally.partyName===vote.CaucusShortName)
+              {
                 tally.nayVote++
               }
             })
-
+            
           }
-          if (vote.IsVoteYea == "true") {
-            voteTallies.forEach(tally => {
-              if (tally.partyName === vote.CaucusShortName) {
+          if (vote.IsVoteYea=="true") {
+            voteTallies.forEach(tally =>{
+              if (tally.partyName===vote.CaucusShortName)
+              {
                 tally.yeaVote++
               }
             })
           }
 
-        })                                                                
+        })
         setVoteData(voteTallies)
-
+        console.log(voteTallies)
       })
 
 
@@ -125,47 +118,6 @@ function BillChart() {
       <Bar dataKey="yeaVote" fill="#8884d8" />
       <Bar dataKey="nayVote" fill="#82ca9d" />
     </BarChart>
-
-    <BarChart width={730} height={250} data={voteData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="partyName" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="yeaVote" fill="#8884d8" />
-      <Bar dataKey="nayVote" fill="#82ca9d" />
-    </BarChart>
-
-    <BarChart width={730} height={250} data={voteData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="partyName" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="yeaVote" fill="#8884d8" />
-      <Bar dataKey="nayVote" fill="#82ca9d" />
-    </BarChart>
-
-    <BarChart width={730} height={250} data={voteData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="partyName" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="yeaVote" fill="#8884d8" />
-      <Bar dataKey="nayVote" fill="#82ca9d" />
-    </BarChart>
-
-    <BarChart width={730} height={250} data={voteData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="partyName" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="yeaVote" fill="#8884d8" />
-      <Bar dataKey="nayVote" fill="#82ca9d" />
-    </BarChart>
-    
   </>
 
 
