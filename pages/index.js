@@ -7,12 +7,12 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Next.js Starter!</title>
+        <title>Political Prototype</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <Header title="This Will Be a Bill Page Maybe?" />
+        <Header title="Look Up Bills" />
         
            <BillChart/>
         
